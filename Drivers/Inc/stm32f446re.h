@@ -215,10 +215,27 @@ typedef struct {
 #define GPIOG					((GPIO_RegDef_t*)BA_GPIOG)
 #define GPIOH					((GPIO_RegDef_t*)BA_GPIOH)
 
+#define GPIO_MODER
+
+#define GPIO_OTYPER_PUSHPULL	0b00
+#define GPIO_OTYPER_OPENDRAIN	0b01
+
+#define GPIO_OSPEED_LOW			0b00
+#define GPIO_OSPEED_MEDIUM		0b01
+#define GPIO_OSPEED_FAST		0b10
+#define GPIO_OSPEED_HIGH		0b11
+
+#define GPIO_PUPDR_NONE			0b00
+#define GPIO_PUPDR_PULLUP		0b01
+#define GPIO_PUPDR_PULLDOWN		0b10
+
+#define
+
+
 //RCC
 #define RCC						((RCC_RegDef_t*)BA_RCC)				//
 
-//RCC_CR Modifiers
+//RCC_AHB1_ENR Modifiers
 #define GPIOA_CLK_EN			(RCC->AHB1_ENR |= (1 << 0)
 #define GPIOB_CLK_EN			(RCC->AHB1_ENR |= (1 << 1)
 #define GPIOC_CLK_EN			(RCC->AHB1_ENR |= (1 << 2)
@@ -232,11 +249,77 @@ typedef struct {
 #define BKPSRAM_CLK_EN			(RCC->AHB1_ENR |= (1 << 18))
 #define DMA1_CLK_EN				(RCC->AHB1_ENR |= (1 << 21))
 #define DMA2_CLK_EN				(RCC->AHB1_ENR |= (1 << 22))
-#define OTG_CLK_EN				(RCC->AHB1_ENR |= (1 << 29))
+#define OTG_HS_CLK_EN			(RCC->AHB1_ENR |= (1 << 29))
 #define OTG_HS_UCLK_EN			(RCC->AHB1_ENR |= (1 << 30))
 
+//RCC_ABH2_ENR modifiers
+#define DMCI_CLK_EN				(RCC->AHB2_ENR |= (1 << 0))
+#define OTF_FS_CLK_EN			(RCC->AHB2_ENR |= (1 << 7))
 
+//RCC_AHB3_ENR modifiers
+#define FMC_CLK_EN				(RCC->AHB3_ENR |= (1 << 0))
+#define QSPI_CLK_EN				(RCC->AHB3_ENR |= (1 << 1))
 
+//RCC_APB1_ENR modifiers
+#define TIM2_CLK_EN				(RCC_APB1_ENR |= (1 << 0))
+#define TIM3_CLK_EN				(RCC_APB1_ENR |= (1 << 1))
+#define TIM4_CLK_EN				(RCC_APB1_ENR |= (1 << 2))
+#define TIM5_CLK_EN				(RCC_APB1_ENR |= (1 << 3))
+#define TIM6_CLK_EN				(RCC_APB1_ENR |= (1 << 4))
+#define TIM7_CLK_EN				(RCC_APB1_ENR |= (1 << 5))
+#define TIM12_CLK_EN			(RCC_APB1_ENR |= (1 << 6))
+#define TIM13_CLK_EN			(RCC_APB1_ENR |= (1 << 7))
+#define TIM14_CLK_EN			(RCC_APB1_ENR |= (1 << 8))
+
+#define WWDG_CLK_EN				(RCC_APB1_ENR |= (1 << 11))
+
+#define SPI2_CLK_EN				(RCC_APB1_ENR |= (1 << 14))
+#define SPI3_CLK_EN				(RCC_APB1_ENR |= (1 << 15))
+
+#define SPDIFRX_CLK_EN			(RCC_APB1_ENR |= (1 << 16))
+
+#define USART2_CLK_EN			(RCC_APB1_ENR |= (1 << 17))
+#define USART3_CLK_EN			(RCC_APB1_ENR |= (1 << 18))
+#define UART4_CLK_EN			(RCC_APB1_ENR |= (1 << 19))
+#define UART5_CLK_EN			(RCC_APB1_ENR |= (1 << 20))
+
+#define I2C1_CLK_EN				(RCC_APB1_ENR |= (1 << 21))
+#define I2C2_CLK_EN				(RCC_APB1_ENR |= (1 << 22))
+#define I2C3_CLK_EN				(RCC_APB1_ENR |= (1 << 23))
+
+#define FMPI2C1_CLK_EN			(RCC_APB1_ENR |= (1 << 24))
+
+#define CAN1_CLK_EN				(RCC_APB1_ENR |= (1 << 25))
+#define CAN2_CLK_EN				(RCC_APB1_ENR |= (1 << 26))
+
+#define CEC_CLK_EN				(RCC_APB1_ENR |= (1 << 27))
+#define PWR_CLK_EN				(RCC_APB1_ENR |= (1 << 28))
+#define DAC_CLK_EN				(RCC_APB1_ENR |= (1 << 29))
+
+//RCC_APB2_ENR modifiers
+#define TIM1_CLK_EN				(RCC_APB2_ENR |= (1 << 0))
+#define TIM8_CLK_EN				(RCC_APB2_ENR |= (1 << 1))
+
+#define USART1_CLK_EN			(RCC_APB2_ENR |= (1 << 4))
+#define USART6_CLK_EN			(RCC_APB2_ENR |= (1 << 5))
+
+#define ADC1_CLK_EN				(RCC_APB2_ENR |= (1 << 8))
+#define ADC2_CLK_EN				(RCC_APB2_ENR |= (1 << 9))
+#define ADC3_CLK_EN				(RCC_APB2_ENR |= (1 << 10))
+
+#define SDIO_CLK_EN				(RCC_APB2_ENR |= (1 << 11))
+
+#define SPI1_CLK_EN				(RCC_APB2_ENR |= (1 << 12))
+#define SPI4_CLK_EN				(RCC_APB2_ENR |= (1 << 13))
+
+#define SYSCFG_CLK_EN			(RCC_APB2_ENR |= (1 << 14))
+
+#define TIM9_CLK_EN				(RCC_APB2_ENR |= (1 << 16))
+#define TIM10_CLK_EN			(RCC_APB2_ENR |= (1 << 17))
+#define TIM11_CLK_EN			(RCC_APB2_ENR |= (1 << 18))
+
+#define SAI1_CLK_EN				(RCC_APB2_ENR |= (1 << 22))
+#define SAI2_CLK_EN				(RCC_APB2_ENR |= (1 << 23))
 
 
 
